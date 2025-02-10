@@ -57,7 +57,10 @@ const Profile = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
+
       console.log(profileData);
+
+      //api implementations
       //   await updateProfile(profileData);
       setIsLoading(false);
       setProfileData({
