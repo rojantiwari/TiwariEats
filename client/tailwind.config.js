@@ -10,7 +10,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        orange: "var(--botton)",
+        orange: "rgb(var(--button))",
         hoverOrange: "var(--hoverButtonColor)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

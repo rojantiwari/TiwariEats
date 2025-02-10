@@ -15,6 +15,7 @@ import { useState } from "react";
 // import { useCartStore } from "@/store/useCartStore";
 // import { CartItem } from "@/types/cartType";
 import HeroImage from "./../assets/hero_pizza.png";
+import CheckoutConfirmPage from "./CheckoutConfirmPage";
 
 const Cart = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -111,7 +112,7 @@ const Cart = () => {
       <div className="flex justify-end my-5">
         <Button
           onClick={() => setOpen(true)}
-          className="bg-orange hover:bg-hoverOrange"
+          className="bg-orange hover:bg-hoverOrange rounded"
         >
           Proceed To Checkout
         </Button>
