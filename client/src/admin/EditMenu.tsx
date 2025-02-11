@@ -17,16 +17,17 @@ import {
   Dispatch,
   FormEvent,
   SetStateAction,
+  useEffect,
   //   useEffect,
   useState,
 } from "react";
 
 const EditMenu = ({
-  //   selectedMenu,
+  selectedMenu,
   editOpen,
   setEditOpen,
 }: {
-  //   selectedMenu: MenuItem;
+  selectedMenu: any;
   editOpen: boolean;
   setEditOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -56,6 +57,7 @@ const EditMenu = ({
     }
 
     // api ka kaam start from here
+
     // try {
     //   const formData = new FormData();
     //   formData.append("name", input.name);
@@ -70,14 +72,14 @@ const EditMenu = ({
     // }
   };
 
-  //   useEffect(() => {
-  //     setInput({
-  //       name: selectedMenu?.name || "",
-  //       description: selectedMenu?.description || "",
-  //       price: selectedMenu?.price || 0,
-  //       image: undefined,
-  //     });
-  //   }, [selectedMenu]);
+  useEffect(() => {
+    setInput({
+      name: selectedMenu?.name || "",
+      description: selectedMenu?.description || "",
+      price: selectedMenu?.price || 0,
+      image: undefined,
+    });
+  }, [selectedMenu]);
   return (
     <Dialog open={editOpen} onOpenChange={setEditOpen}>
       <DialogContent className="bg-white">

@@ -17,6 +17,23 @@ import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 // import { useMenuStore } from "@/store/useMenuStore";
 // import { useRestaurantStore } from "@/store/useRestaurantStore";
 
+const menu = [
+  {
+    name: "Pizza",
+    description: "Dami Pizza lomra ",
+    price: 100,
+    image:
+      "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
+  },
+  {
+    title: "Biryani",
+    description:
+      "loremjnfdksjdsf  nkfdjsd knfkdn kknf knfdnf  loram knwema jnjsioew lomra ",
+    price: 80,
+    image:
+      "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
+  },
+];
 const AddMenu = () => {
   const [input, setInput] = useState<MenuFormSchema>({
     name: "",
@@ -27,7 +44,7 @@ const AddMenu = () => {
 
   const [open, setOpen] = useState<boolean>(false);
   const [editOpen, setEditOpen] = useState<boolean>(false);
-  //   const [selectedMenu, setSelectedMenu] = useState<any>();
+  const [selectedMenu, setSelectedMenu] = useState<any>();
   const [error, setError] = useState<Partial<MenuFormSchema>>({});
   const loading = false;
   //   const { loading, createMenu } = useMenuStore();
@@ -165,40 +182,8 @@ const AddMenu = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <div
-        //   key={idx}
-        className="mt-6 space-y-4"
-      >
-        <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
-          <img
-            src="https://media.istockphoto.com/id/1457979959/photo/snack-junk-fast-food-on-table-in-restaurant-soup-sauce-ornament-grill-hamburger-french-fries.jpg?s=612x612&w=0&k=20&c=QbFk2SfDb-7oK5Wo9dKmzFGNoi-h8HVEdOYWZbIjffo="
-            alt=""
-            className="md:h-24 md:w-24 h-16 w-full object-cover rounded-lg"
-          />
-          <div className="flex-1">
-            <h1 className="text-lg font-semibold text-gray-800">
-              {/* {menu.name}  */}Menu Name
-            </h1>
-            <p className="text-sm tex-gray-600 mt-1">
-              {/* {menu.description} */} Menu Description
-            </p>
-            <h2 className="text-md font-semibold mt-2">
-              Price: <span className="text-[#D19254]">80</span>
-            </h2>
-          </div>
-          <Button
-            onClick={() => {
-              // setSelectedMenu(menu);
-              setEditOpen(true);
-            }}
-            size={"sm"}
-            className="bg-orange hover:bg-hoverOrange mt-2"
-          >
-            Edit
-          </Button>
-        </div>
-      </div>
-      {/* {restaurant?.menus.map((menu: any, idx: number) => (
+
+      {menu.map((menu: any, idx: number) => (
         <div key={idx} className="mt-6 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
             <img
@@ -212,7 +197,7 @@ const AddMenu = () => {
               </h1>
               <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>
               <h2 className="text-md font-semibold mt-2">
-                Price: <span className="text-[#D19254]">80</span>
+                Price: <span className="text-[#D19254]">{menu.price}</span>
               </h2>
             </div>
             <Button
@@ -227,9 +212,9 @@ const AddMenu = () => {
             </Button>
           </div>
         </div>
-      ))} */}
+      ))}
       <EditMenu
-        // selectedMenu={selectedMenu}
+        selectedMenu={selectedMenu}
         editOpen={editOpen}
         setEditOpen={setEditOpen}
       />
