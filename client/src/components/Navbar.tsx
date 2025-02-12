@@ -41,6 +41,7 @@ import { Separator } from "./ui/separator";
 const Navbar = () => {
   const admin = true;
   const loading = false;
+
   return (
     <div className=" max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
@@ -124,6 +125,7 @@ const Navbar = () => {
               ) : (
                 <Button
                   // onClick={logout}
+
                   className="bg-orange rounded-xl hover:bg-hoverOrange"
                 >
                   Logout

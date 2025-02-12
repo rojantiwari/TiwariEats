@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { loginInputState, userLoginInputState } from "@/schema/userSchema";
+import { useUserStore } from "@/store/useUserStore";
 import { Separator } from "@radix-ui/react-separator";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -13,25 +14,31 @@ function Login() {
   });
 
   const [errors, setErrors] = useState<Partial<loginInputState>>({});
+  let { loading, login } = useUserStore();
+  // const navigate = useNavigate();
 
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const loginSubmitHandler = (e: FormEvent) => {
+  const loginSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     const result = userLoginInputState.safeParse(input);
 
     if (!result.success) {
       const fieldErrors = result.error.formErrors.fieldErrors;
       setErrors(fieldErrors as Partial<loginInputState>);
+      return;
     }
 
-    console.log(input);
+    try {
+      await login(input);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  const loading = false;
 
   return (
     <div className="flex items-center justify-center h-screen w-screen overflow-hidden">
