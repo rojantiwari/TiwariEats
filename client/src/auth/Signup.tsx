@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signupInputState, userSignupSchema } from "@/schema/userSchema";
+import { useUserStore } from "@/store/useUserStore";
+// import { useUserStore } from "@/store/useUserStore";
 import { Separator } from "@radix-ui/react-separator";
 import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //typescript - 2 ways to define types
 // interface LoginInputState {
@@ -29,15 +31,17 @@ function Signup() {
     password: "",
     contact: "",
   });
-
+  // const loading = false;
   const [errors, setErrors] = useState<Partial<signupInputState>>({});
+  const { signup, loading } = useUserStore();
+  const navigate = useNavigate();
 
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const signupSubmitHandler = (e: FormEvent) => {
+  const signupSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     // form validation check start
 
@@ -50,7 +54,12 @@ function Signup() {
 
     //signup api implementations
 
-    console.log(input);
+    try {
+      await signup(input);
+      navigate("/verifyemail");
+    } catch (error) {
+      console.log(error);
+    }
 
     setInput({
       fullname: "",
@@ -59,8 +68,6 @@ function Signup() {
       contact: "",
     });
   };
-
-  const loading = false;
 
   return (
     <div className="flex items-center justify-center h-screen w-screen overflow-hidden ">

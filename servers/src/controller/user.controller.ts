@@ -18,7 +18,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const verificationToken = generateVerificationCode(10);
+        const verificationToken = generateVerificationCode(6);
 
         user = await prisma.user.create({
             data: {
@@ -56,7 +56,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         generateToken(res, user);
         await prisma.user.update({ where: { email }, data: { lastLogin: new Date() } });
 
-        return res.status(200).json({ success: true, message: `Welcome back ${user.fullname}`, user });
+        return res.status(200).json({ success: true, message: `Login Successfully ${user.fullname}`, user });
     } catch (error) {
         next(error);
     }
