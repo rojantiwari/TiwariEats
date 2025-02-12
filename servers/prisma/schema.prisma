@@ -65,7 +65,7 @@ model Order {
   id              String @id @default(uuid())
   userId          String
   restaurantId    String
-  deliveryDetails String
+  deliveryDetails Json
   cartItems       Json
   totalAmount     Float
   status          String @default("pending")

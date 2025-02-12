@@ -37,15 +37,19 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
+import { useCartStore } from "@/store/useCartStore";
 
 const Navbar = () => {
   const admin = true;
   const loading = false;
+  const { count, increment } = useCartStore();
   return (
     <div className=" max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
         <Link to="/">
-          <h1 className="font-bold md:font-extrabold text-2xl">Tiwari Eats</h1>
+          <h1 className="font-bold md:font-extrabold text-2xl">
+            Tiwari Eats {count}
+          </h1>
         </Link>
         <div className="md:flex items-center gap-10">
           <div className="hidden md:flex items-center gap-6">
@@ -124,6 +128,7 @@ const Navbar = () => {
               ) : (
                 <Button
                   // onClick={logout}
+                  onClick={increment}
                   className="bg-orange rounded-xl hover:bg-hoverOrange"
                 >
                   Logout
