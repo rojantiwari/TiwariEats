@@ -37,7 +37,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         res.status(201).json({
             success: true,
             message: "Account created successfully",
-            user: _.omit(user, ['password', 'verificationToken']),
+            user: _.omit(user, ['password']),
         });
     } catch (error) {
         next(error);
