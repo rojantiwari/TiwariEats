@@ -3,13 +3,14 @@ import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/store/useUserStore";
 import { Loader2 } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
 
   const inputRef = useRef<any>([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { loading, verifyEmail } = useUserStore();
 
   const handleChange = (index: number, value: string) => {
@@ -40,7 +41,7 @@ const VerifyEmail = () => {
     const verificationCode: string = otp.join(",");
     try {
       await verifyEmail(verificationCode);
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

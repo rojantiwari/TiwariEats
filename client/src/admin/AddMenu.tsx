@@ -14,26 +14,26 @@ import { Loader2, Plus } from "lucide-react";
 import React, { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
-// import { useMenuStore } from "@/store/useMenuStore";
-// import { useRestaurantStore } from "@/store/useRestaurantStore";
+import { useMenuStore } from "@/store/useMenuStore";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
-const menu = [
-  {
-    name: "Pizza",
-    description: "Dami Pizza lomra ",
-    price: 100,
-    image:
-      "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
-  },
-  {
-    title: "Biryani",
-    description:
-      "loremjnfdksjdsf  nkfdjsd knfkdn kknf knfdnf  loram knwema jnjsioew lomra ",
-    price: 80,
-    image:
-      "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
-  },
-];
+// const menu = [
+//   {
+//     name: "Pizza",
+//     description: "Dami Pizza lomra ",
+//     price: 100,
+//     image:
+//       "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
+//   },
+//   {
+//     title: "Biryani",
+//     description:
+//       "loremjnfdksjdsf  nkfdjsd knfkdn kknf knfdnf  loram knwema jnjsioew lomra ",
+//     price: 80,
+//     image:
+//       "https://www.shutterstock.com/image-photo/american-style-brunch-tomato-omelette-260nw-2424020343.jpg",
+//   },
+// ];
 const AddMenu = () => {
   const [input, setInput] = useState<MenuFormSchema>({
     name: "",
@@ -46,10 +46,9 @@ const AddMenu = () => {
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [selectedMenu, setSelectedMenu] = useState<any>();
   const [error, setError] = useState<Partial<MenuFormSchema>>({});
-  const loading = false;
-  //   const { loading, createMenu } = useMenuStore();
-  // const restaurant = false
-  //   const { restaurant } = useRestaurantStore();
+
+  const { loading, createMenu } = useMenuStore();
+  const { restaurant } = useRestaurantStore();
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
@@ -64,19 +63,19 @@ const AddMenu = () => {
       setError(fieldErrors as Partial<MenuFormSchema>);
       return;
     }
-    // api ka kaam start from here
-    // try {
-    //   const formData = new FormData();
-    //   formData.append("name", input.name);
-    //   formData.append("description", input.description);
-    //   formData.append("price", input.price.toString());
-    //   if (input.image) {
-    //     formData.append("image", input.image);
-    //   }
-    //   await createMenu(formData);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    // api ko kaam start from here
+    try {
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("description", input.description);
+      formData.append("price", input.price.toString());
+      if (input.image) {
+        formData.append("image", input.image);
+      }
+      await createMenu(formData);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="max-w-6xl mx-auto my-10 ">
@@ -85,7 +84,7 @@ const AddMenu = () => {
           Available Menus
         </h1>
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger className="bg-white">
+          <DialogTrigger asChild>
             <Button className="bg-[#F97316] hover:bg-hoverOrange rounded">
               <Plus className="mr-2" />
               Add Menus
@@ -109,7 +108,7 @@ const AddMenu = () => {
                   placeholder="Enter menu name"
                   className="rounded"
                 />
-                {error && (
+                {error?.name && (
                   <span className="text-xs font-medium text-red-600">
                     {error.name}
                   </span>
@@ -125,7 +124,7 @@ const AddMenu = () => {
                   placeholder="Enter menu description"
                   className="rounded"
                 />
-                {error && (
+                {error?.description && (
                   <span className="text-xs font-medium text-red-600">
                     {error.description}
                   </span>
@@ -141,7 +140,7 @@ const AddMenu = () => {
                   placeholder="Enter menu price"
                   className="rounded"
                 />
-                {error && (
+                {error?.price && (
                   <span className="text-xs font-medium text-red-600">
                     {error.price}
                   </span>
@@ -160,9 +159,9 @@ const AddMenu = () => {
                   }
                   className="rounded"
                 />
-                {error && (
+                {error?.image?.name && (
                   <span className="text-xs font-medium text-red-600">
-                    {error.image?.name}
+                    {error.image.name}
                   </span>
                 )}
               </div>
@@ -183,7 +182,7 @@ const AddMenu = () => {
         </Dialog>
       </div>
 
-      {menu.map((menu: any, idx: number) => (
+      {restaurant.menus.map((menu: any, idx: number) => (
         <div key={idx} className="mt-6 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
             <img

@@ -20,6 +20,8 @@ import AddMenu from "./admin/AddMenu";
 import Orders from "./admin/Orders";
 import Success from "./components/Success";
 import { useUserStore } from "./store/useUserStore";
+import { useEffect } from "react";
+import Loading from "./components/Loading";
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, user } = useUserStore();
@@ -149,6 +151,15 @@ const appRouter = createBrowserRouter([
   },
 ]);
 function App() {
+  const { checkAuthentication, isCheckingAuth } = useUserStore();
+
+  //checking Auth every time when loading
+
+  useEffect(() => {
+    checkAuthentication();
+  }, [checkAuthentication]);
+
+  if (isCheckingAuth) return <Loading />;
   return (
     <>
       <RouterProvider router={appRouter}></RouterProvider>

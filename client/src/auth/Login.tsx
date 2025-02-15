@@ -5,7 +5,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { Separator } from "@radix-ui/react-separator";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [input, setInput] = useState<loginInputState>({
@@ -15,7 +15,7 @@ function Login() {
 
   const [errors, setErrors] = useState<Partial<loginInputState>>({});
   let { loading, login } = useUserStore();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,6 +35,7 @@ function Login() {
 
     try {
       await login(input);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
