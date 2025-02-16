@@ -8,7 +8,7 @@ import { Card, CardContent, CardFooter } from "./ui/card";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Link } from "react-router-dom";
 import Heroimage from "./../assets/hero_pizza.png";
-import { Skeleton } from "./ui/skeleton";
+// import { Skeleton } from "./ui/skeleton";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
