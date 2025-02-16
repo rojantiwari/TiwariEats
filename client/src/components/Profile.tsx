@@ -86,6 +86,7 @@ const Profile = () => {
             <input
               ref={imageRef}
               className="hidden "
+              placeholder="Profile Picture"
               type="file"
               accept="image/*"
               onChange={fileChangeHandler}
@@ -100,7 +101,8 @@ const Profile = () => {
           <Input
             type="text"
             name="fullname"
-            value={profileData.fullname}
+            // value={profileData.fullname}
+            value="Rojan Tiwari"
             onChange={changeHandler}
             className="font-bold text-2xl outline-none rounded border-none focus-visible:ring-transparent bg-slate-200"
           />
@@ -114,7 +116,8 @@ const Profile = () => {
             <input
               disabled
               name="email"
-              value={profileData.email}
+              // value={profileData.email}
+              value="rojantiwari12121@gmail.com"
               onChange={changeHandler}
               className="w-full bg-pink-200 text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
             />
@@ -126,7 +129,8 @@ const Profile = () => {
             <Label>Address</Label>
             <input
               name="address"
-              value={profileData.address}
+              // value={profileData.address}
+              value="Kaski"
               onChange={changeHandler}
               className="w-full bg-pink-200 text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
             />
@@ -138,7 +142,8 @@ const Profile = () => {
             <Label>City</Label>
             <input
               name="city"
-              value={profileData.city}
+              // value={profileData.city}
+              value="Pokhara"
               onChange={changeHandler}
               className="w-full bg-pink-200 text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
             />
@@ -150,7 +155,8 @@ const Profile = () => {
             <Label>Country</Label>
             <input
               name="country"
-              value={profileData.country}
+              // value={profileData.country}
+              value="Nepal"
               onChange={changeHandler}
               className="w-full bg-pink-200 text-gray-600 bg-transparent focus-visible:ring-0 focus-visible:border-transparent outline-none border-none"
             />
